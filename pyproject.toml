@@ -1,8 +1,15 @@
 [tool.poetry]
 name = "hypotest-python3-sdk"
-version = "1.0.2"
+version = "1.0.4"
 description = ""
 authors = ["lior brafman <liorb87@gmail.com>"]
+maintainers = ["Lior Brafman <liorb87@gmail.com>"]
+license = "Apache-2.0 License"
+readme = "README.md"
+homepage = "https://github.com/HypoTest-io/hypotest-python3-sdk"
+repository = "https://github.com/HypoTest-io/hypotest-python3-sdk"
+documentation = "https://github.com/HypoTest-io/hypotest-python3-sdk"
+keywords = ["ab testing", "experiment", "platform experimentation"]
 
 [tool.poetry.dependencies]
 python = "^3.4"
