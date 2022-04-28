@@ -6,7 +6,7 @@ class HtConfig:
     def __init__(self):
         self.address = 'https://sdk.hypotest.io'
         self.port = 443
-        self.version = '1.0.0'
+        self.version = '1.0.6'
         self.sdk_type = 'python3'
         self.pull_interval = int(os.environ.get('HT_PULL_INTERVAL', 30))
         self.pull_jitter = int(os.environ.get('HT_PULL_JITTER', 5))

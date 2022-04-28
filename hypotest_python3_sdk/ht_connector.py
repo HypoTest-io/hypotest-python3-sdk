@@ -1,10 +1,7 @@
 import json
-from requests import ConnectionError, Timeout
 from urllib3.util.retry import Retry
 from urllib3.util import Timeout
-from urllib3.exceptions import ReadTimeoutError
 from urllib3 import PoolManager
-from urllib3.exceptions import MaxRetryError
 
 from .config import ht_config
 from .logger import logger
@@ -56,17 +53,7 @@ def _http_call(method, data_type, url, body=None):
         if not body:
             body = {}
         body = json.dumps(body, skipkeys=True, cls=HypoJSONEncoder).encode('utf-8')
-        # body = json.dumps(body).encode('utf-8')
         response = http_pool.request(method=method, url=url, body=body, retries=retries)
-    except (Timeout, ReadTimeoutError) as e:
-        logger.warning({'error': e, 'error_description': 'timeout for ' + data_type, 'body': body})
-        return None
-    except ConnectionError as e:
-        logger.warning({'error': e, 'error_description': 'connection error for ' + data_type, 'body': body})
-        return None
-    except MaxRetryError as e:
-        logger.warning({'error': e, 'error_description': ' max retries exceeded for ' + data_type, 'body': body})
-        return None
     except Exception as e:
         logger.warning({'error': e, 'error_description': ' general exception for ' + data_type, 'body': body})
         return None
