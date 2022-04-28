@@ -1,12 +1,14 @@
 import os
 from copy import copy
+from .logger import logger
+from .retrieve_experiments import retrieve_experiments
 
 
 class HtConfig:
     def __init__(self):
         self.address = 'https://sdk.hypotest.io'
         self.port = 443
-        self.version = '1.0.6'
+        self.version = '1.0.7'
         self.sdk_type = 'python3'
         self.pull_interval = int(os.environ.get('HT_PULL_INTERVAL', 30))
         self.pull_jitter = int(os.environ.get('HT_PULL_JITTER', 5))
@@ -32,3 +34,7 @@ def config(token: str = None, pull_interval: int = None, pull_jitter: int = None
         if value is None:
             continue
         setattr(ht_config, name, value)
+        if name == 'log_level':
+            logger.setLevel(value.uper())
+        elif name == 'token':
+            retrieve_experiments()
