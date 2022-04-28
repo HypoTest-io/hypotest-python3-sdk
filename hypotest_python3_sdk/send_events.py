@@ -1,7 +1,7 @@
 from queue import Queue, Empty
-from config import ht_config
-from logger import logger
-import ht_connector
+from .config import ht_config
+from .logger import logger
+from . import ht_connector
 
 _q = Queue()
 

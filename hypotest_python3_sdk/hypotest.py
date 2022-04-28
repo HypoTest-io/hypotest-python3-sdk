@@ -2,13 +2,11 @@ import atexit
 from typing import Dict, Union
 from datetime import datetime
 from threading import Thread
-from config import config, ht_config
-from logger import logger
-from utils import convert_user_visitor_to_str, put_event, datetime_format
-from routing import experiment
-from variant import Variant
-from send_events import events_sender_thread, flush_events_in_queue
-from retrieve_experiments import retrieve_experiments_thread
+from .config import ht_config
+from .logger import logger
+from .utils import convert_user_visitor_to_str, put_event, datetime_format
+from .send_events import events_sender_thread, flush_events_in_queue
+from .retrieve_experiments import retrieve_experiments_thread
 
 
 if ht_config.async_mode:

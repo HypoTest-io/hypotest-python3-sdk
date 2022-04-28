@@ -1,6 +1,6 @@
 import logging
 
-from config import ht_config
+from .config import ht_config
 
 
 def create_logger():

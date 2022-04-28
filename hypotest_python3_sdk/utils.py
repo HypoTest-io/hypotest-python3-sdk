@@ -1,6 +1,6 @@
-from logger import logger
-from config import ht_config
-from send_events import put_event_in_queue
+from .logger import logger
+from .config import ht_config
+from .send_events import put_event_in_queue
 
 
 datetime_format = '%Y-%m-%d %H:%M:%S.%f'

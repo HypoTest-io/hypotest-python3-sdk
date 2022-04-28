@@ -6,8 +6,8 @@ from urllib3.exceptions import ReadTimeoutError
 from urllib3 import PoolManager
 from urllib3.exceptions import MaxRetryError
 
-from config import ht_config
-from logger import logger
+from .config import ht_config
+from .logger import logger
 
 
 class HypoJSONEncoder(json.JSONEncoder):
@@ -37,11 +37,21 @@ dummy_experiment = {'test_id': 1000000,
                     'override_b': []}
 dummy_all_experiments = {'tests': {dummy_experiment['test_name']: dummy_experiment}}
 
-if ht_config.connect_to_server:
-    http_pool = PoolManager(headers={'Authorization': "Bearer " + ht_config.token}, timeout=timeout)
+http_pool = None
 
 
 def _http_call(method, data_type, url, body=None):
+    global http_pool
+    if not ht_config.connect_to_server:
+        return None
+
+    if ht_config.token is None:
+        logger.warning({'error': 'token is None'})
+        return None
+
+    if http_pool is None:
+        http_pool = PoolManager(headers={'Authorization': "Bearer " + ht_config.token}, timeout=timeout)
+
     try:
         if not body:
             body = {}
@@ -81,7 +91,8 @@ def get_all_experiments():
         all_experiments = dummy_all_experiments
     if all_experiments is None:
         logger.warning({"error": "failed to get all series and tests, giving up"})
-    all_experiments = all_experiments.get('tests')
+    else:
+        all_experiments = all_experiments.get('tests')
     return all_experiments
 
 

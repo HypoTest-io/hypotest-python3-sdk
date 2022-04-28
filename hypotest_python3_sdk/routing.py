@@ -1,13 +1,12 @@
-import os
 from typing import Dict, Union
 from datetime import datetime
 import math
-import pymmh3
-from config import ht_config
-from logger import logger
-from variant import Variant
-from utils import convert_user_visitor_to_str, put_event, datetime_format
-from retrieve_experiments import experiments, failed_retrieve_settings, retrieve_experiments
+from . import pymmh3
+from .config import ht_config
+from .logger import logger
+from .variant import Variant
+from .utils import convert_user_visitor_to_str, put_event, datetime_format
+from .retrieve_experiments import experiments, failed_retrieve_settings, retrieve_experiments
 
 CONTROL = 'control'
 

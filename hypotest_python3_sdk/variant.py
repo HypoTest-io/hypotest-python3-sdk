@@ -1,5 +1,5 @@
 import json
-from logger import logger
+from .logger import logger
 
 
 class Variant:

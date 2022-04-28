@@ -1,9 +1,9 @@
 import time
 import random
-from experiment_settings import ExperimentSettings
-from config import ht_config
-from logger import logger
-import ht_connector
+from .experiment_settings import ExperimentSettings
+from .config import ht_config
+from .logger import logger
+from . import ht_connector
 
 failed_retrieve_settings = None
 experiments = {}
