@@ -7,7 +7,7 @@ _q = Queue()
 
 
 def events_sender_thread():
-    while True:
+    while ht_config.async_mode:
         try:
             events = _q.get(timeout=ht_config.queue_timeout)
             if events == ['DONE']:

@@ -9,12 +9,16 @@ from .send_events import events_sender_thread, flush_events_in_queue
 from .retrieve_experiments import retrieve_experiments_thread
 
 
-if ht_config.async_mode:
-    for thread_func in [events_sender_thread, retrieve_experiments_thread]:
-        _thread = Thread(target=thread_func)
-        _thread.daemon = True
-        _thread.start()
-    atexit.register(flush_events_in_queue)
+def start_threads():
+    if ht_config.async_mode:
+        for thread_func in [events_sender_thread, retrieve_experiments_thread]:
+            _thread = Thread(target=thread_func)
+            _thread.daemon = True
+            _thread.start()
+        atexit.register(flush_events_in_queue)
+
+
+start_threads()
 
 
 def kpi_event(event_name: str, user_id=None, visitor_id=None, value=1.0,

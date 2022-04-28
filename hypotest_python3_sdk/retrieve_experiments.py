@@ -42,6 +42,6 @@ def retrieve_experiments():
 
 
 def retrieve_experiments_thread():
-    while True:
+    while ht_config.async_mode:
         retrieve_experiments()
         time.sleep(random.randint(ht_config.pull_interval, ht_config.pull_interval + ht_config.pull_jitter))
