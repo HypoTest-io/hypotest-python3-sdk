@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "hypotest-python3-sdk"
-version = "1.0.8"
+version = "1.0.9"
 description = ""
 authors = ["lior brafman <liorb87@gmail.com>"]
 maintainers = ["Lior Brafman <liorb87@gmail.com>"]

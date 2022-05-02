@@ -45,7 +45,17 @@ hypotest.match_user_visitor(user_id='u123', visitor_id='123')
 ```
 
 ## SDK overview and principles
+the SDK has 2 way communicate with Hypo's server:
+* the sdk pulls every "pull_interval" seconds experiments settings
+* the sdk reports events back to Hypo's server  
 
+the SDK was design with safety in mind:
+* the experiment function will return "control" for every error!, such as:  
+Hypo's servers are down  
+wrong parameters were used  
+experiment or event don't exist
+* the experiment function calculate variant locally, so no need to be afraid of delaying response time
+* the SDK sends all events in a background thread
 
 ## Functions description and examples:
 
@@ -77,8 +87,10 @@ def config(token='kfds9werjkvjd', pull_interval=5, pull_jitter=1,
 def experiment(experiment_name: str, user_id: str = None, visitor_id: str = None,
                tags: Dict[str, Union[str, int, float, bool, None]] = None, override: str = None, report_event=True)
 ```
-this function is to warp your current and new code as en experiment,  
-the function returns the chosen variant, and report the event back to Hypo's server
+this function is to warp your current and new code as an experiment,  
+the function returns the chosen variant, and report the event back to Hypo's server  
+the function calculate for each user/visitor per test a variant locally,  
+the function is deterministic, each user/visitor combined with an experiment will allways get the same variant
 * **experiment_name**: the experiment key name as created in the platform   
 * **user_id** | **visitor_id**: user_id or visitor_id string associated with the experiment,  
 if the experiment starts before the user login/signup, use visitor_id (potential_id/anonymous_id),  
