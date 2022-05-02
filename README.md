@@ -45,9 +45,9 @@ hypotest.match_user_visitor(user_id='u123', visitor_id='123')
 ```
 
 ## SDK overview and principles
-the SDK has 2 way communicate with Hypo's server:
+the SDK has a 2 way communication with Hypo's servers:
 * the sdk pulls every "pull_interval" seconds experiments settings
-* the sdk reports events back to Hypo's server  
+* the sdk reports events back to Hypo's servers  
 
 the SDK was design with safety in mind:
 * the experiment function will return "control" for every error!, such as:  
@@ -69,12 +69,12 @@ you can configure the sdK in 2 ways:
    HT_TOKEN | HT_PULL_INTERVAL | HT_PULL_JITTER | HT_LOG_LEVEL | HT_FLUSH_EVENTS | HT_CONNECT_TO_SERVER
 2. by calling this function with the below parameters  
 [all are optional]
-* **token**: the access token given by HypoTest for the SDK to be able to communicate with Hypo's server  
+* **token**: the access token given by HypoTest for the SDK to be able to communicate with Hypo's servers 
 * **pull_interval**: a background thread will pull the latest settings from the server each "poll_interval" seconds  
 * **pull_jitter**: jitter number of seconds between each pull  
 * **log_level**: the SDK log to stdout, possible options 'CRITICAL' | 'FATAL' | 'ERROR' | 'WARN' | 'WARNING' | 'INFO' | 'DEBUG'| 'NOTSET'
-* **flush_events**: True|False if the SDK flushes the remaining event in the queue before the process end  
-* **connect_to_server**:  if False, the SDK doesn't connect to Hypo's server. it uses dummy configuration and doesn't send events   
+* **flush_events**: True|False if the SDK flushes the remaining events in the queue before the process ends  
+* **connect_to_server**:  if False, the SDK doesn't connect to Hypo's servers. it uses dummy configuration and doesn't send events   
 
 example:
 ```python
@@ -88,7 +88,7 @@ def experiment(experiment_name: str, user_id: str = None, visitor_id: str = None
                tags: Dict[str, Union[str, int, float, bool, None]] = None, override: str = None, report_event=True)
 ```
 this function is to warp your current and new code as an experiment,  
-the function returns the chosen variant, and report the event back to Hypo's server  
+the function returns the chosen variant, and report the event back to Hypo's servers  
 the function calculate for each user/visitor per test a variant locally,  
 the function is deterministic, each user/visitor combined with an experiment will allways get the same variant
 * **experiment_name**: the experiment key name as created in the platform   
@@ -99,7 +99,7 @@ else use user_id
 **optional**
 * **tags**: a key value dictionary for "tagging" the user/visitor such as country, is_free, user_age, device_type, os, etc    
 * **override**: override the variant chosen, a string with one of the variants in the experiment  
-* **report_event**: if False, the function doesn't report an experiment exposure event to the server
+* **report_event**: if False, the function doesn't report an experiment exposure event to the servers
 
 examples:
 ```python 
@@ -122,7 +122,7 @@ experiment(experiment_name='signup/alternative-landingpage/difference-copywritin
 def kpi_event(event_name: str, user_id=None, visitor_id=None, value=1.0,
               tags: Dict[str, Union[str, int, float, bool, None]] = None)
 ```
-to report a kpi event back to Hypo's server
+to report a kpi event back to Hypo's servers
 * **event_name**: the kpi event name key name as created in the platform  
 * **user_id** | **visitor_id**: user_id or visitor_id string associated with the event,  
 if the event occurs before the user login/signup, use visitor_id (potential_id/anonymous_id),  
