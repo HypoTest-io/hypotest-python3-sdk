@@ -25,8 +25,7 @@ ht_config = HtConfig()
 
 
 def config(token: str = None, pull_interval: int = None, pull_jitter: int = None,
-           queue_timeout: int = None, log_level: str = None, flush_events: bool = None,
-           connect_to_server: bool = None):
+           log_level: str = None, flush_events: bool = None, connect_to_server: bool = None):
     kwargs = copy(locals())
     for name, value in kwargs.items():
         if value is None:
